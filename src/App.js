@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import './App.css';
 import { Board } from './components/Board'
 import { Scoreboard } from './components/Scoreboard';
+import { GameOver } from './components/GameOver';
 
 const WIN = [
   [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
-  [0, 4, 7],
+  [0, 4, 8],
   [2, 4, 6],
   [0, 3, 6],
   [1, 4, 7],
@@ -35,11 +36,11 @@ function App() {
         let {oScore} = scores;
         oScore++;
         setScores(() => ({...scores, oScore}));
-      } else {
+      } else if (winner === 'X') {
         let {xScore} = scores;
         xScore++;
         setScores(() => ({...scores, xScore}));
-      }
+      } 
     }
 
     setBoard(() => newBoard);
@@ -54,9 +55,17 @@ function App() {
         return board[x];
       }
     }
+
+    for (let i = 0; i < 9; i++) {
+      if (!board[i]) {
+        return null;
+      }
+    }
+    setGameOver(() => true);
+    return 'Tie';
   }
 
-  const resetGame = (board) => {
+  const resetGame = () => {
     setGameOver(() => false);
     setBoard(() => [null, null, null, null, null, null, null, null, null]);
   }
@@ -64,7 +73,8 @@ function App() {
   return (
     <div className="App">
       <Scoreboard scores={scores} playerX={playerX} />
-      <Board board={board} onClick={gameOver ? resetGame : handleBoxClick} />
+      <Board gameOver={gameOver} board={board} onClick={gameOver ? resetGame : handleBoxClick} />
+      <GameOver gameOver={gameOver} board={board} checkWin={checkWin} />
     </div>
   );
 }

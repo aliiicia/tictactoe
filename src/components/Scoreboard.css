@@ -19,17 +19,17 @@
 
 .x-score {
   color: lightseagreen;
-  border-bottom: 10px solid lightseagreen;
+  border-bottom: 8px solid lightseagreen;
   border-radius: 1rem 0 0 1rem;
 }
 
 .o-score {
   color: turquoise;
-  border-bottom: 10px solid turquoise;
+  border-bottom: 8px solid turquoise;
   border-radius: 0 1rem 1rem 0;
 }
 
 .inactive {
-  border-bottom: 10px solid transparent;
+  border-bottom: 8px solid transparent;
   border-radius: 0 1rem 1rem 0;
 }
